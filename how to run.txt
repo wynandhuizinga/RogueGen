@@ -1,0 +1,18 @@
+
+
+install first time
+
+conda create -n chargen python=3.12
+
+conda activate chargen
+
+python -m venv venv
+
+venv\Scripts\activate
+pip install requests numpy
+
+
+
+conda activate chargen
+venv\Scripts\activate
+python chargen.py

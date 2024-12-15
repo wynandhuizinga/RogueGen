@@ -1,0 +1,7 @@
+generated/**
+assets/generated/**
+backup/**
+venv/
+studies/
+__pycache__/
+datavalidator-err.txt
