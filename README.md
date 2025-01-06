@@ -17,8 +17,8 @@ Succesful installation of:
 
 ### Installation
 #### Cloning & configuration
-- open cmd, type '''git clone https://github.com/wynandhuizinga/RogueGen.git'''
-- in CMD: '''cd RogueGen'''
+- open cmd, type ```git clone https://github.com/wynandhuizinga/RogueGen.git```
+- in CMD: ```cd RogueGen```
 - open Settings.py and update:
 	- number_of_generations --> recommend to start with 3
 	- LLMendpoint --> ensure endpoint is available prior to first run
@@ -26,11 +26,11 @@ Succesful installation of:
 	After one generation you can also update playDirectory to 'replay' same seed and skip the 3hr generation process. Leave blank for first run. 
 
 #### Installation
-- in CMD: '''python -m venv venv'''
-	- activate it: '''.\venv\Scripts\activate'''
-- in CMD (venv): '''pip install -r requirements.txt''' --> can take a few minutes
-- in CMD (venv): '''pip install requests Pillow numpy opencv-python pygame''' --> had to split it out - suggestions welcome.
-- in CMD (venv): '''python game.py''' -> this should trigger first character generation, then player generation, and eventually launch the game. 
+- in CMD: ```python -m venv venv```
+	- activate it: ```.\venv\Scripts\activate```
+- in CMD (venv): ```pip install -r requirements.txt``` --> can take a few minutes
+- in CMD (venv): ```pip install requests Pillow numpy opencv-python pygame``` --> had to split it out - suggestions welcome.
+- in CMD (venv): ```python game.py``` -> this should trigger first character generation, then player generation, and eventually launch the game. 
 
 ## Result
 The result is a seeded game which takes forever to load (2-3 hours easily), but does provide a new experience each run. Although no story elements have been implemented this far, characters do generate their own back stories, avatars and appearances. Each character adds a set of guns to the game which can be purchased and upgraded. In game, characters can also converse based on their 'generated' emotions. It's by no means perfect, but it can certainly be enhanced and empowered with new prompt engineering, additional conversation history context tracking and by using different LLMs. 
