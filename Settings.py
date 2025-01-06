@@ -25,7 +25,7 @@ VerboseLogging = True
 FailureLogging = True
 
 Races = ["Caucasian","White","Asian","Indian"]
-Moods = ["cranky","extremely happy","lazy","talkative","businessminded","mindblown","lush","explorative","Dead tired","depressed","excited","spiritual","pleasing"]
+Moods = ["cranky","extremely happy","lazy","talkative","businessminded","mindblown","lush","explorative","Dead tired","depressed","excited","spiritual","pleasing","Joyful","Melancholy","Content","Anxious","Angry","Hopeful","Fearful","Excited","Frustrated","Nostalgic","Confident","Guilty","Lonely","Grateful","Bored","Embarrassed","Curious","Loving","Resentful"]
 Styles = ["goth","diva","god","feminist","villain","superhero","demon","devil","celestial","military person","high-school student","dumb shit","survivor","sorcerer","medieval princess","business lady","hospital nurse","doctor","holographic","multi dimensional space entity","viking","hypnotist","mind-reader","magician","vampire","samurai","mermaid","mma fighter","pro-wrestler","skater","librarian","policeman","gardener","master judoka","street-dancer","flight attendant","shaman","celestial","gate-keeper","hitch-hiker","barber","journalist","receptionist","teacher","health educator","waitress","secret agent","company boss","forest ranger","jail warden","plumber","carpenter","dermatologist","shaolin kungfu monk","kpop dancer","Actor","Bartender","Dentist","Makeup Artist","Musician","Salesperson","Taxi Driver","Zookeeper"]
 SceneryFilter = ["bed","bedroom"]
 
