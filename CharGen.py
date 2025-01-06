@@ -304,7 +304,6 @@ class CharGen():
             if not (CGtesting or Failed):
                 print("\t\t\t\t Step 4c: Generate weapon element", end='\r')
                 text = api_handler.completion(self.seed+x,PV.element(first_name,chosen_style,personality_response_final,description_response_final,specialization_response_final),25,3,0.9,0.9,80)
-                print("\nElement: ",text)
                 elemental_final = text.split('.',1)[0].split(',',1)[0]
                 if VerboseLogging: self.logger.logGeneration(str("SUCCESS: Magical elemental description identified: "+elemental_final))
                 data['magical-element'] = elemental_final
@@ -314,7 +313,6 @@ class CharGen():
             if not (CGtesting or Failed):
                 print("\t\t\t\t Step 4d: Generate weapon explosion", end='\r')
                 text = api_handler.completion(self.seed+x,PV.explosion(elemental_final),20,3,1.0,1.0,80)
-                print("\nExplosion: ",text)
                 explosion_final = text.split('.',1)[0].split('\n',1)[0]
                 if VerboseLogging: self.logger.logGeneration(str("SUCCESS: Explosion description identified: "+explosion_final))
                 data['magical-explosion'] = explosion_final
