@@ -110,13 +110,12 @@ class CharGen():
             #JSON lists        
             data = {}
             CharGen_data = {}
-            tags = ["Social","NSFW"]
             data['CharGen_data'] = CharGen_data
-            data['tags'] = tags
             CharGen_data['race'] = chosen_race
             CharGen_data['seed'] = self.seed
             CharGen_data['CharGen_version'] = self.CharGenVersion
             CharGen_data['selected_style'] = selected_style
+            CharGen_data['mood'] = chosen_mood
             CharGen_data['fav_color'] = fav_color
             CharGen_data['fav_color_rgb'] = fav_color_rgb
             CharGen_data['llm-modelname'] = self.model_name
@@ -504,7 +503,7 @@ class CharGen():
             # Step 6b: Render SD Picture --> base picture to get enhanced
             print("\t\t\t\t Step 6b: Try render SD Picture - stable diffusion calls", end='\r')
             if not (SDChartesting or Failed):
-                sdrenderPrompt = PV.sdrenderPrompt(SD_prompt_subj_response_final, chosen_race,fav_color)
+                sdrenderPrompt = PV.sdrenderPrompt(SD_prompt_subj_response_final, chosen_race,fav_color,chosen_mood)
                 generated_image = api_handler.SDRender(self.seed,sdrenderPrompt,PV.sdrenderPromptNeg(),30,12,448,768,"DDIM")
                 imagetitle = name_response+" - "+ selected_style +".png"           
                 imagename = self.filepath + str(y) + " - " + str(self.seed) + " - " + imagetitle
@@ -514,8 +513,8 @@ class CharGen():
                     f.write(base64.b64decode(generated_image['images'][0]))
                 if VerboseLogging: self.logger.logTime("step-6b")
             
-            # Step 6c: Render SD Revealing Picture
-            print("\t\t\t\t Step 6c: Try render SD Revealing Picture - stable diffusion calls", end='\r')
+            # Step 6c: Render SD Beaten Picture
+            print("\t\t\t\t Step 6c: Try render SD Beaten Picture - stable diffusion calls", end='\r')
             if not (SDChartesting or Failed):
                 image_path = imagename
                 result_content = api_handler.send_image_to_stable_diffusion(self.seed,image_path,PV.sdrenderBeatenPrompt(chosen_race),PV.sdrenderBeatenNegPrompt(),40,13,0.9,448,768,"DDIM") # self,seed,image_path,prompt,negprompt,steps,cfg_scale,strength,width,height,sampler_name
@@ -527,7 +526,7 @@ class CharGen():
             print("\t\t\t\t Step 6d: Try render SD Wet Picture - stable diffusion calls", end='\r')
             if not (SDChartesting or Failed):
                 image_path = imagename
-                prompt = PV.sdrenderWetPrompt(chosen_race)
+                prompt = PV.sdrenderWetPrompt(chosen_race,chosen_mood)
                 result_content = api_handler.send_image_to_stable_diffusion(self.seed,image_path,prompt,PV.sdrenderWetNegPrompt(),30,12,0.75,448,768,"DDIM") # self,seed,image_path,prompt,negprompt,steps,cfg_scale,strength,width,height,sampler_name
                 Image_data['wet'] = result_content
                 new_image_path = api_handler.save_image(result_content, image_path,"-wet")
@@ -537,7 +536,7 @@ class CharGen():
             print("\t\t\t\t Step 6d: Try render SD Regular Picture - stable diffusion calls", end='\r')
             if not (SDChartesting or Failed):
                 image_path = imagename
-                prompt = PV.sdrenderRegularPrompt(chosen_race)
+                prompt = PV.sdrenderRegularPrompt(chosen_race,chosen_mood)
                 result_content = api_handler.send_image_to_stable_diffusion(self.seed,image_path,prompt,PV.sdrenderRegularNegPrompt(),30,12,0.75,448,768,"DDIM") # self,seed,image_path,prompt,negprompt,steps,cfg_scale,strength,width,height,sampler_name
                 Image_data['regular'] = result_content
                 new_image_path = api_handler.save_image(result_content, image_path,"-regular")

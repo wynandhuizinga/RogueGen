@@ -48,10 +48,8 @@ class Player():
             self.fav_color = fav_color
             self.fav_color_rgb  = jsondata.get('color', {}).get(self.fav_color)
 
-        print("PLAYGEN: Player's Fav_color:",self.fav_color,"- fav_color_rgb:",self.fav_color_rgb)
-        
-        #self.coordinate_generations(char_type)
-        
+        print("PLAYGEN: Character's Fav_color:",self.fav_color,"- fav_color_rgb:",self.fav_color_rgb)
+                
     def convert_template_to_fav_color(self, image_path, color_str=(0, 0, 255),bleached=False,doublebleached=False):
     
         color = tuple(map(int, color_str.replace('(','').replace(')','').split(',')))
