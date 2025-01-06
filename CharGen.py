@@ -45,7 +45,9 @@ class CharGen():
         
     
     def generate(self,seed):
-        print("Planning to generate ",number_of_generations," fictional characters")
+        generations = number_of_generations
+
+        print("Planning to generate ",generations," fictional characters")
 
         # setup 2 - Input Parameters
         init_seed = self.seed
@@ -85,7 +87,7 @@ class CharGen():
         #           -+- Generation loop -+-           #
         #=============================================#
 
-        for y in range(1, number_of_generations+1):
+        for y in range(1, generations+1):
             # Step 1: Generation setup
             starttime = time.time()
             Failed = False
@@ -732,8 +734,8 @@ class CharGen():
             else:
                 print("Total failure / debugging")
                 
-            if y < number_of_generations:
-                print("Forcasted time left: ", str("{:.2f}".format((time.time() - ProgramStartTime) / (y) * (number_of_generations-y))), ". Average generation speed: ",str("{:.2f}".format((time.time() - ProgramStartTime) / (y))),"\n============\n")
+            if y < generations:
+                print("Forcasted time left: ", str("{:.2f}".format((time.time() - ProgramStartTime) / (y) * (generations-y))), ". Average generation speed: ",str("{:.2f}".format((time.time() - ProgramStartTime) / (y))),"\n============\n")
             else: 
                 print("Batch Complete in: ", str("{:.2f}".format(time.time() - ProgramStartTime)))
             if VerboseLogging: self.logger.record_averages()
@@ -770,9 +772,9 @@ class CharGen():
         playerData['Gun_Data']['Gatling_Guns'] = gunGenerator.generate("Gatling Gun",1,3,fav_color, fav_color_rgb,iteration=0)
 
         
-        player = Player(self.filepath,self.logger,seed=seed+number_of_generations*2,char_type='player',fav_color=fav_color,subject="Robot")
+        player = Player(self.filepath,self.logger,seed=seed+generations*2,char_type='player',fav_color=fav_color,subject="Robot")
         playerData['CharGen_data']['PlayerSprites'] = player.coordinate_generations('player')
-        floortextures = FloortextureGen(self.filepath,seed=seed+number_of_generations*2,char_type="player", color_str=str(player.fav_color_rgb))
+        floortextures = FloortextureGen(self.filepath,seed=seed+generations*2,char_type="player", color_str=str(player.fav_color_rgb))
         playerData['CharGen_data']['FloorSprites'] = floortextures.process_image(seed, PV.floor("wood"), PV.floorNeg(), 50, 13, 0.95, 512, 512, "DDIM")
         playerData['FloorSprites-neutral'] = floortextures.process_image_neutral(seed+100, PV.floor("grass"), PV.floorNeg(), 50, 13, 0.95, 512, 512, "DDIM") # neutral textures
         with open(self.filepath+"/0 - "+str(seed)+" - player.json", 'w', encoding='utf-8') as f:
@@ -780,7 +782,7 @@ class CharGen():
         if VerboseLogging: self.logger.logTime("step-11")        
         
         # Bad correction for aborted character generations
-        number_of_generations = number_of_generations - FailureCounter
+        generations = generations - FailureCounter
 
         # Step 13: End summary
         if VerboseLogging: self.logger.logGeneration(str("\n\n\nFINAL STATS\n============\n"+str(v_c | DV.valCount())))

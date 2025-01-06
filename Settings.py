@@ -1,5 +1,5 @@
 # SETUP Parameters
-number_of_generations = 7
+number_of_generations = 3
 SeedOverride = "" #54787032 #"provide 8 digit number without quotes"
 playDirectory = "" #"./assets/generated/v016/20241215-54787032-llama2-13b-orca-8k-3319-True/" # define folder with forward (/) slashes, end with slash --> ./assets/generated/.../
 
