@@ -219,7 +219,6 @@ class Character(pygame.sprite.Sprite):
 
     def loseCredits(self):
         self.credits = 0
-        print(self.credits)
 
     def getDamage(self, bullet_group, map_generator):
         for bullet in bullet_group:

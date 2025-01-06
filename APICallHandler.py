@@ -75,7 +75,7 @@ class APICallHandler():
                                 "top_k": top_k,
                                 "stream": False
                             })
-        print(messages)
+        # print(messages) # Debug messaging
 
         if res.status_code != 200:
             print(f"Error: Status Code {res.status_code}")

@@ -34,7 +34,6 @@ class Dialogue():
         backspace_timer = 0
         backspace_interval = 30
         player.credits += 2000 # TODO - Remove
-        print("player gets additional free 100 moneys, new balance: ", player.credits) # TODO - Remove
 
         while run:
             self.clock.tick(self.FPS)
@@ -121,7 +120,6 @@ class Dialogue():
                     elif event.key == pygame.K_PAGEDOWN:
                         scroll_offset = max(scroll_offset - chat_box_height, min(chat_box_height - total_height - 20, 0))
                     elif event.key == pygame.K_BACKQUOTE:
-                        print("hit")
                         gun_list = self.open_shop(conversingEnemy, player, gun_list)
                     else:
                         input_text += event.unicode
