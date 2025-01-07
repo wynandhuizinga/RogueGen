@@ -25,7 +25,8 @@ class Dialogue():
         input_text = ''
         
         chat_history = [
-            {"role": "system", "content": conversingEnemy.jsondata['scenario'] + ". You are a " + conversingEnemy.jsondata['CharGen_data']['selected_style'] + ". Your chat style is extremely " + conversingEnemy.jsondata['CharGen_data']['mood'] +"."},
+            # {"role": "system", "content": conversingEnemy.jsondata['scenario'] + ". You are a " + conversingEnemy.jsondata['CharGen_data']['selected_style'] + ". Your chat style is extremely " + conversingEnemy.jsondata['CharGen_data']['mood'] +"."}, # nice when using better language models.
+            {"role": "system", "content": ". You are a " + conversingEnemy.jsondata['CharGen_data']['selected_style'] + ". Your chat style is extremely " + conversingEnemy.jsondata['CharGen_data']['mood'] +"."},
             {"role": "assistant", "content": random.choice(conversingEnemy.jsondata['CharGen_data']['taunts'])}
         ]
 

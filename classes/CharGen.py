@@ -498,7 +498,7 @@ class CharGen():
             # Step 6b: Render SD Picture --> base picture to get enhanced
             print("\t\t\t\t Step 6b: Try render SD Picture - stable diffusion calls", end='\r')
             if not (SDChartesting or Failed):
-                sdrenderPrompt = PV.sdrenderPrompt(SD_prompt_subj_response_final, chosen_race,fav_color,chosen_mood)
+                sdrenderPrompt = PV.sdrenderPrompt(SD_prompt_subj_response_final, chosen_race,fav_color,chosen_mood,chosen_style)
                 generated_image = api_handler.SDRender(self.seed,sdrenderPrompt,PV.sdrenderPromptNeg(),30,12,448,768,"DDIM")
                 imagetitle = name_response+" - "+ selected_style +".png"           
                 imagename = self.filepath + str(y) + " - " + str(self.seed) + " - " + imagetitle
@@ -513,7 +513,7 @@ class CharGen():
             print("\t\t\t\t Step 6c: Try render SD Beaten Picture - stable diffusion calls", end='\r')
             if not (SDChartesting or Failed):
                 image_path = imagename
-                result_content = api_handler.send_data_to_stable_diffusion(self.seed,generated_image['images'][0],PV.sdrenderBeatenPrompt(chosen_race),PV.sdrenderBeatenNegPrompt(),40,13,0.9,448,768,"DDIM") # self,seed,image_path,prompt,negprompt,steps,cfg_scale,strength,width,height,sampler_name
+                result_content = api_handler.send_data_to_stable_diffusion(self.seed,generated_image['images'][0],PV.sdrenderBeatenPrompt(chosen_race,chosen_style),PV.sdrenderBeatenNegPrompt(),40,13,0.9,448,768,"DDIM") # self,seed,image_path,prompt,negprompt,steps,cfg_scale,strength,width,height,sampler_name
                 Image_data['beaten'] = result_content
                 if AvatarTesting: new_image_path = api_handler.save_image(result_content, image_path,"-beaten",AvatarTesting)
                 else: new_image_path = api_handler.save_image(result_content, image_path,"-beaten")
@@ -523,7 +523,7 @@ class CharGen():
             print("\t\t\t\t Step 6d: Try render SD Wet Picture - stable diffusion calls", end='\r')
             if not (SDChartesting or Failed):
                 image_path = imagename
-                prompt = PV.sdrenderWetPrompt(chosen_race,chosen_mood)
+                prompt = PV.sdrenderWetPrompt(chosen_race,chosen_mood,chosen_style)
                 result_content = api_handler.send_data_to_stable_diffusion(self.seed,generated_image['images'][0],prompt,PV.sdrenderWetNegPrompt(),30,12,0.75,448,768,"DDIM") # self,seed,image_path,prompt,negprompt,steps,cfg_scale,strength,width,height,sampler_name
                 Image_data['wet'] = result_content
                 if AvatarTesting: new_image_path = api_handler.save_image(result_content, image_path,"-wet",AvatarTesting)
@@ -534,7 +534,7 @@ class CharGen():
             print("\t\t\t\t Step 6d: Try render SD Regular Picture - stable diffusion calls", end='\r')
             if not (SDChartesting or Failed):
                 image_path = imagename
-                prompt = PV.sdrenderRegularPrompt(chosen_race,chosen_mood)
+                prompt = PV.sdrenderRegularPrompt(chosen_race,chosen_mood,chosen_style)
                 result_content = api_handler.send_data_to_stable_diffusion(self.seed,generated_image['images'][0],prompt,PV.sdrenderRegularNegPrompt(),30,12,0.75,448,768,"DDIM") # self,seed,image_path,prompt,negprompt,steps,cfg_scale,strength,width,height,sampler_name
                 Image_data['regular'] = result_content
                 if AvatarTesting: new_image_path = api_handler.save_image(result_content, image_path,"-regular",AvatarTesting)
@@ -688,10 +688,10 @@ class CharGen():
                 data['Gun_Data'] = Gun_Data
                 Rifles = Rocket_Launchers = Magic_Wands = Gatling_Guns = {}
 
-                data['Gun_Data']['Rifles'] = gunGenerator.generate("Rifle",2,5,fav_color, fav_color_rgb, iteration=y)
-                data['Gun_Data']['Rocket_Launchers'] = gunGenerator.generate("Rocket Launcher",2,4,fav_color, fav_color_rgb,iteration=y)
-                data['Gun_Data']['Magic_Wands'] = gunGenerator.generate("((magic wand))",2,4,fav_color, fav_color_rgb,iteration=y)
-                data['Gun_Data']['Gatling_Guns'] = gunGenerator.generate("Gatling Gun",2,3,fav_color, fav_color_rgb,iteration=y)
+                data['Gun_Data']['Rifles'] = gunGenerator.generate("Rifle",1,5,fav_color, fav_color_rgb, iteration=y)
+                data['Gun_Data']['Rocket_Launchers'] = gunGenerator.generate("Rocket Launcher",1,4,fav_color, fav_color_rgb,iteration=y)
+                data['Gun_Data']['Magic_Wands'] = gunGenerator.generate("((magic wand))",1,15,fav_color, fav_color_rgb,iteration=y)
+                data['Gun_Data']['Gatling_Guns'] = gunGenerator.generate("Gatling Gun",1,3,fav_color, fav_color_rgb,iteration=y)
                 
                 print("\t\t\t\t Step 9: Built character weapon assets", end='\r')
                 if VerboseLogging: self.logger.logTime("step-9")
@@ -764,7 +764,7 @@ class CharGen():
         
         playerData['Gun_Data']['Rifles'] = gunGenerator.generate("Rifle",2,5,fav_color, fav_color_rgb, iteration=0)
         playerData['Gun_Data']['Rocket_Launchers'] = gunGenerator.generate("Rocket Launcher",1,4,fav_color, fav_color_rgb,iteration=0)
-        playerData['Gun_Data']['Magic_Wands'] = gunGenerator.generate("((magic wand))",1,5,fav_color, fav_color_rgb,iteration=0)
+        playerData['Gun_Data']['Magic_Wands'] = gunGenerator.generate("((magic wand))",1,15,fav_color, fav_color_rgb,iteration=0)
         playerData['Gun_Data']['Gatling_Guns'] = gunGenerator.generate("Gatling Gun",1,3,fav_color, fav_color_rgb,iteration=0)
 
         

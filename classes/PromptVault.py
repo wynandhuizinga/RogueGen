@@ -55,23 +55,23 @@ class PromptVault():
     def sdprepPrePrompt():
         return "You solely sum up lists of physical descriptions from character provided in context consisely. You reference features above knees. For example: \"short leather skirt, jeans, buttoned office shirt, blond hairbun, blue eyes, large earrings, medal on chest, scar on neck.\" Never mention footwear"
     
-    def sdrenderPrompt(SD_prompt_subj_response_final,race,color,chosen_mood):
-        return "high resolution cinematic still, ((photo-realistic)), (close-up) masterpiece, high resolution, RAW, ("+chosen_mood+") face, looking at camera, ("+ race +"), "+ SD_prompt_subj_response_final + ", ("+color+") colored clothes, detailed, professional, unreal engine, photo-realistic, HD, 8K, soft lighting, lifelike texture, by Agnes Cecile"
+    def sdrenderPrompt(SD_prompt_subj_response_final,race,color,chosen_mood,chosen_style):
+        return "high resolution cinematic still, ((photo-realistic)), (close-up) masterpiece, high resolution, RAW, ("+chosen_mood+") face, ("+chosen_style+") outfit, ("+ race +"), "+ SD_prompt_subj_response_final + ", ("+color+") colored clothes, detailed, professional, unreal engine, photo-realistic, HD, 8K, soft lighting, lifelike texture, by Agnes Cecile"
     
     def sdrenderPromptNeg():
         return "(worst_quality), (low_quality), lowres, kid, cartoon, (disfigured), illustration, painting, fused fingers, long neck, malformed limbs, mutated hands, malformed hands, watermark, distorted hands, grayscale, monochrome, aberrations, filmgrain, high ISO, bikini, bra, naked, nude"
         
-    def sdrenderBeatenPrompt(race):
-        return "high resolution cinematic still, ((photo-realistic)), (close-up) masterpiece, high resolution, RAW, exhausted beaten face, sweating, looking at camera, ((bruised)), ((punched)) ("+ race +") face, torn clothes, detailed, professional, unreal engine, photo-realistic, HD, 8K, soft lighting, lifelike texture, by Agnes Cecile"
+    def sdrenderBeatenPrompt(race,chosen_style):
+        return "high resolution cinematic still, ((photo-realistic)), (close-up) masterpiece, high resolution, RAW, exhausted beaten face, sweating, damaged ("+chosen_style+") outfit, ((bruised)), ((punched)) ("+ race +") face, torn clothes, detailed, professional, unreal engine, photo-realistic, HD, 8K, soft lighting, lifelike texture, by Agnes Cecile"
         
     def sdrenderBeatenNegPrompt():
         return "(worst_quality), (low_quality), lowres, kid, cartoon, (disfigured), illustration, painting, fused fingers, long neck, malformed limbs, mutated hands, malformed hands, watermark, distorted hands, grayscale, monochrome, aberrations, filmgrain, high ISO, clothes, wearing, shirt, top, bra"
         
-    def sdrenderWetPrompt(race,chosen_mood):
-        return "high resolution cinematic still, ((photo-realistic)), (close-up) masterpiece, high resolution, RAW, soaking wet face, (("+ chosen_mood +")) expression,looking at camera, ("+ race +"), soaking wet clothes, wet hair, water droplets, detailed, professional, unreal engine, photo-realistic, HD, 8K, soft lighting, lifelike texture, by Agnes Cecile"
+    def sdrenderWetPrompt(race,chosen_mood, chosen_style):
+        return "high resolution cinematic still, ((photo-realistic)), (close-up) masterpiece, high resolution, RAW, soaking wet face, (("+ chosen_mood +")) expression, wet ("+chosen_style+") outfit, ("+ race +"), soaking wet clothes, wet hair, water droplets, detailed, professional, unreal engine, photo-realistic, HD, 8K, soft lighting, lifelike texture, by Agnes Cecile"
         
-    def sdrenderRegularPrompt(race,chosen_mood):
-        return "high resolution cinematic still, ((photo-realistic)), (close-up) masterpiece, high resolution, RAW,  (("+ chosen_mood +")) face, looking at camera, ("+ race +"), nurtured skin, nourished, pores, healthy, detailed, professional, unreal engine, photo-realistic, HD, 8K, soft lighting, lifelike texture, by Agnes Cecile"
+    def sdrenderRegularPrompt(race,chosen_mood,chosen_style):
+        return "high resolution cinematic still, ((photo-realistic)), (close-up) masterpiece, high resolution, RAW,  (("+ chosen_mood +")) face, ("+chosen_style+") outfit, ("+ race +"), nurtured skin, nourished, pores, healthy, detailed, professional, unreal engine, photo-realistic, HD, 8K, soft lighting, lifelike texture, by Agnes Cecile"
         
     def sdrenderWetNegPrompt():
         return "(worst_quality), (low_quality), lowres, kid, cartoon, (disfigured), illustration, painting, fused fingers, long neck, malformed limbs, mutated hands, malformed hands, watermark, distorted hands, grayscale, monochrome, aberrations, filmgrain, high ISO, bikini, bra, naked, nude"

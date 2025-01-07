@@ -28,7 +28,7 @@ class GunGen():
         self.counter += 100
         gun_data_list = []
 
-        for j in range(amount):
+        for j in range(1,amount+1):
             # Helper function to draw a fading line
             def draw_fading_line(draw, start, end, width, color):
                 half_width = width // 2
@@ -40,7 +40,7 @@ class GunGen():
                     fade_color = int(color[0] * alpha), int(color[1] * alpha), int(color[2] * alpha)
                     draw.line([(start[0], start[1] + i), (end[0], end[1] + i)], fill=fade_color)
 
-            for k in range(11): #(attempts per iteration j)
+            for k in range(1,11): #(attempts per iteration j)
                 # 1. Generate a full black image of 448 by 832 pixels
                 img = Image.new('RGB', (width, height), black)
                 draw = ImageDraw.Draw(img)
@@ -125,7 +125,7 @@ class GunGen():
                 # 16. Check if more than 80% of the pixels have a non-zero alpha value
                 if alpha_pixel_count / total_pixels <= 0.2:
                     # Convert combined image to base64
-                    print("Attempt ",j,", picture is workable (not overly full): ",alpha_pixel_count / total_pixels, "% \t\t\t\t\t", end='\r')
+                    print("Attempt ",j,", picture is workable (not overly full): ",str("{:.2f}".format(alpha_pixel_count / total_pixels)), "% \t\t\t\t\t", end='\r')
                     break
                 else:
                     print("Attempt ",j,", picture is overly full (cannot filter background): ",str("{:.2f}".format(alpha_pixel_count / total_pixels)), "%, ABORTING! \t\t\t\t\t", end='\r')  
@@ -239,6 +239,7 @@ class GunGen():
                 "base_gun_data": base_gun_data,
                 "upgraded_gun_data": upgraded_gun_data
             })
+            
         print("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t", end='\r') # blanking issues line
 
         return gun_data_list
