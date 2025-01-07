@@ -1,8 +1,9 @@
 # RogueGen
+[Watch on Youtube](https://www.youtube.com/watch?v=A0NcyUApxUw)
+
 [![Demo on Youtube](https://img.youtube.com/vi/A0NcyUApxUw/0.jpg)](https://www.youtube.com/watch?v=A0NcyUApxUw)
-Click to watch on youtube
 ## What's this?
-This repository is the result of an exploration providing GPT4.o to a non-developer in pursuit of 'developing' a game. In this exploration, the goal was to develop a game without editor, which procedurally generates all assets by leveraging 
+This repository is the result of an exploration providing GPT4.o to a non-developer in pursuit of 'developing' a game. In this exploration, the goal was to develop a game without editor, which procedurally generates all assets by leveraging:
 1) A locally hosted LLM - for generation of character context (llama2-13b-orca-8k-3319 - on huggingface).
 2) Stable diffusion 1.5 - for associated graphical assets with Stable diffusion (1.5 - model Lascivious v2 on CivitAI).
 
@@ -27,7 +28,7 @@ Succesful installation of:
 	After one generation you can also update playDirectory to 'replay' same seed and skip the 3hr generation process. Leave blank for first run. 
 
 #### Installation
-- in CMD: ```python -m venv venv```
+- in command prompt (CMD) create a virtual environment: ```python -m venv venv```
 	- activate it: ```.\venv\Scripts\activate```
 - in CMD (venv): ```pip install -r requirements.txt``` --> can take a few minutes
 - in CMD (venv): ```pip install requests Pillow numpy opencv-python pygame``` --> had to split it out - suggestions welcome.
