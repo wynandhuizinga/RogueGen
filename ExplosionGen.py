@@ -5,7 +5,7 @@ import requests
 import json
 import random
 from APICallHandler import *
-from Settings import API_SETTINGS
+from Settings import *
 
 api_handler = APICallHandler(API_SETTINGS)
 
@@ -89,8 +89,9 @@ class ExplosionGenerator:
                 _, final_buffer_temp = cv2.imencode('.png', temp_image)
                 final_base64_image_temp = base64.b64encode(final_buffer_temp).decode('utf-8')
                 animation_sequence.append(final_base64_image_temp)
-                with open(f'{path}explosion_step_{i}{j}.png', 'wb') as f:
-                    f.write(base64.b64decode(final_base64_image_temp))
+                if SDDebugging:
+                    with open(f'{path}explosion_step_{i}{j}.png', 'wb') as f:
+                        f.write(base64.b64decode(final_base64_image_temp))
 
                 # Apply alpha and radial fade to the base image
                 base_image_with_alpha = self.apply_alpha_and_fade(base_image)

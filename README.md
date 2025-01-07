@@ -2,8 +2,8 @@
 [![Demo on Youtube](https://img.youtube.com/vi/A0NcyUApxUw/0.jpg)](https://www.youtube.com/watch?v=A0NcyUApxUw)
 ## What's this?
 This repository is the result of an exploration providing GPT4.o to a non-developer in pursuit of 'developing' a game. In this exploration, the goal was to develop a game without editor, which procedurally generates all assets by leveraging 
-1) A locally hosted LLM - for generation of character context (llama2-13b-orca-8k-3319).
-2) Stable diffusion 1.5 - for associated graphical assets with Stable diffusion (1.5).
+1) A locally hosted LLM - for generation of character context (llama2-13b-orca-8k-3319 - on huggingface).
+2) Stable diffusion 1.5 - for associated graphical assets with Stable diffusion (1.5 - model Lascivious v2 on CivitAI).
 
 ## Getting started
 ### Pre-requisites:

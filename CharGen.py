@@ -120,7 +120,6 @@ class CharGen():
             CharGen_data['fav_color_rgb'] = fav_color_rgb
             CharGen_data['llm-modelname'] = self.model_name
             Image_data = {}
-
             
             
             # Step 1: Generate name
@@ -130,11 +129,10 @@ class CharGen():
                 
                 retries = 10
                 for x in range(0, retries+1):
-                    #apicall = api_handler.chat(self.seed+x,namePrompt,7,4,1,0.9,50)
                     if ChatSystemTesting:
-                        name_response = api_handler.chat2(self.seed+x,PV.namePrePrompt(),PV.namePrompt(selected_style),20,4,1.3,0.9,90)
+                        name_response = api_handler.chat2(self.seed+x,PV.namePrePrompt(),PV.namePrompt(selected_style),20,4,1.3,0.9,90) # testing agentic generation
                     else:
-                        name_response = api_handler.chat(self.seed+x,PV.namePrompt(selected_style),7,4,1,0.9,50)
+                        name_response = api_handler.chat(self.seed+x,PV.namePrompt(selected_style),7,4,1,0.9,50) # testing non-agentic generation
                     name_response = name_response.replace("\n", "").replace("Name: ","").replace("name: ","")
                     if not(DV.nameValidate(name_response) and name_response.count(" ") < 3):
                         if FailureLogging: self.logger.logGeneration(str("ERROR Failed attempt ("+str(x)+") to generate name, Attempted name: "+name_response))
@@ -182,9 +180,9 @@ class CharGen():
                 print("\t\t\t\t Step 2b: Generate looks description", end='\r')
                 #description_response = api_handler.chat(self.seed,PV.descriptionPrompt(selected_style, name_response),150,40,1,0.9,50)
                 if ChatSystemTesting:
-                    description_response = api_handler.chat2(self.seed,PV.descriptionPrePrompt(), PV.descriptionPrompt(selected_style, name_response),150,40,1,0.9,50)
+                    description_response = api_handler.chat2(self.seed,PV.descriptionPrePrompt(), PV.descriptionPrompt(selected_style, name_response),150,40,1,0.9,50) # testing agentic generation
                 else:
-                    description_response = api_handler.chat(self.seed,PV.descriptionPrompt(selected_style, name_response),150,40,1,0.9,50)
+                    description_response = api_handler.chat(self.seed,PV.descriptionPrompt(selected_style, name_response),150,40,1,0.9,50) # testing non-agentic generation
                 description_response_final = description_response.split('.',-1)[0]
                 data['physical-description'] = description_response_final
                 # TODO - Add validation
@@ -196,9 +194,9 @@ class CharGen():
                 print("\t\t\t\t Step 2c: Generate interaction description", end='\r')
                 #des_interaction_response = api_handler.chat(self.seed,PV.interactionPrompt(specialization_response, name_response),120,60,1,0.9,50)
                 if ChatSystemTesting:
-                    des_interaction_response = api_handler.chat2(self.seed,PV.interactionPrePrompt(),PV.interactionPrompt(specialization_response, name_response,chosen_mood),120,60,0.9,0.9,50)
+                    des_interaction_response = api_handler.chat2(self.seed,PV.interactionPrePrompt(),PV.interactionPrompt(specialization_response, name_response,chosen_mood),120,60,0.9,0.9,50) # testing agentic generation
                 else: 
-                    des_interaction_response = api_handler.chat(self.seed,PV.interactionPrompt(specialization_response, name_response),120,60,1,0.9,50)
+                    des_interaction_response = api_handler.chat(self.seed,PV.interactionPrompt(specialization_response, name_response),120,60,1,0.9,50) # testing non-agentic generation
                 des_interaction_response_final = des_interaction_response.split('.',-1)[0]
                 data['interaction-description'] = des_interaction_response_final
                 # TODO - Add validation
@@ -229,9 +227,9 @@ class CharGen():
                 for x in range(0, retries+1):
                     #personality_response = api_handler.chat(self.seed+x,PV.personalityPrompt(description_response),50,4,1,0.9,50)
                     if ChatSystemTesting:
-                        personality_response = api_handler.chat2(self.seed+x,PV.personalityPrePrompt(),PV.personalityPrompt(description_response),50,4,1.1,0.9,50)
+                        personality_response = api_handler.chat2(self.seed+x,PV.personalityPrePrompt(),PV.personalityPrompt(description_response),50,4,1.1,0.9,50) # testing agentic generation
                     else:
-                        personality_response = api_handler.chat(self.seed+x,PV.personalityPrompt(description_response),50,4,1,0.9,50)
+                        personality_response = api_handler.chat(self.seed+x,PV.personalityPrompt(description_response),50,4,1,0.9,50) # testing non-agentic generation
                     personality_response = re.sub('(\n|)[0-9]{1,2}. ',', ',personality_response)
                     personality_response = re.sub('\n- ',', ',personality_response)
                     if re.search(first_name, personality_response):
@@ -257,9 +255,9 @@ class CharGen():
                 for x in range(0, retries+1):
                     #scenario_response = api_handler.chat(self.seed+x,scenarioPrompt,150,4,1,0.9,50)
                     if ChatSystemTesting:
-                        scenario_response = api_handler.chat2(self.seed+x,PV.scenarioPrePrompt(), scenarioPrompt,200,4,1,0.9,50)
+                        scenario_response = api_handler.chat2(self.seed+x,PV.scenarioPrePrompt(), scenarioPrompt,200,4,1,0.9,50) # testing agentic generation
                     else:
-                        scenario_response = api_handler.chat(self.seed+x,scenarioPrompt,150,4,1,0.9,50)
+                        scenario_response = api_handler.chat(self.seed+x,scenarioPrompt,150,4,1,0.9,50) # testing non-agentic generation
                     scenario_response = (scenario_response
                         .replace("I ", "{{user}} ")
                         .replace(name_response, "{{char}}")
@@ -322,11 +320,10 @@ class CharGen():
             if not (CGtesting or Failed):
                 print("\t\t\t\t Step 5a: Generate greeting", end='\r')
                 greeting_gen_prompt = PV.greetingPrompt(scenario_response_final, first_name, chosen_style, chosen_mood)
-                #greeting_response = api_handler.chat(self.seed,greeting_gen_prompt,80,10,1,0.9,50)
                 if ChatSystemTesting:
-                    greeting_response = api_handler.chat2(self.seed,PV.greetingPrePrompt(),greeting_gen_prompt,200,10,0.9,1.2,80)
+                    greeting_response = api_handler.chat2(self.seed,PV.greetingPrePrompt(),greeting_gen_prompt,200,10,0.9,1.2,80) # testing agentic generation
                 else:
-                    greeting_response = api_handler.chat(self.seed,greeting_gen_prompt,200,10,1,0.9,50)
+                    greeting_response = api_handler.chat(self.seed,greeting_gen_prompt,200,10,1,0.9,50) # testing non-agentic generation
                 greeting_response_c1 = (greeting_response
                     .replace("I ", "{{user}} ")
                     .replace(name_response, "{{char}}")
@@ -475,11 +472,10 @@ class CharGen():
                 retries = 10
                 for x in range(0, retries+1):
                     sdprepPrompt = PV.sdprepPrompt(description_response, first_name)
-                    #SD_prompt_subj_response = api_handler.chat(self.seed+x,sdprepPrompt,80,20,0.9,0.8,50)
                     if ChatSystemTesting:
-                        SD_prompt_subj_response = api_handler.chat2(self.seed+x,PV.sdprepPrePrompt(),sdprepPrompt,150,20,1.2,1.2,80)
+                        SD_prompt_subj_response = api_handler.chat2(self.seed+x,PV.sdprepPrePrompt(),sdprepPrompt,150,20,1.2,1.2,80) # testing agentic generation
                     else:
-                        SD_prompt_subj_response = api_handler.chat(self.seed+x,sdprepPrompt,150,20,0.9,0.8,50)
+                        SD_prompt_subj_response = api_handler.chat(self.seed+x,sdprepPrompt,150,20,0.9,0.8,50) # testing non-agentic generation
                     SD_prompt_subj_response = re.sub('(\n|)- ',', ',SD_prompt_subj_response)
                     SD_prompt_subj_response = re.sub('(\n|)[0-9]{1,2}. ',', ',SD_prompt_subj_response)
                     SD_prompt_subj_response = re.sub('^, ','',SD_prompt_subj_response)
@@ -509,15 +505,16 @@ class CharGen():
                 imagename = self.filepath + str(y) + " - " + str(self.seed) + " - " + imagetitle
                 data['Image_data'] = Image_data
                 Image_data['base'] = imagename
-                with open(imagename, 'wb') as f:
-                    f.write(base64.b64decode(generated_image['images'][0]))
+                if SDDebugging:
+                    with open(imagename, 'wb') as f:
+                        f.write(base64.b64decode(generated_image['images'][0]))
                 if VerboseLogging: self.logger.logTime("step-6b")
             
             # Step 6c: Render SD Beaten Picture
             print("\t\t\t\t Step 6c: Try render SD Beaten Picture - stable diffusion calls", end='\r')
             if not (SDChartesting or Failed):
                 image_path = imagename
-                result_content = api_handler.send_image_to_stable_diffusion(self.seed,image_path,PV.sdrenderBeatenPrompt(chosen_race),PV.sdrenderBeatenNegPrompt(),40,13,0.9,448,768,"DDIM") # self,seed,image_path,prompt,negprompt,steps,cfg_scale,strength,width,height,sampler_name
+                result_content = api_handler.send_data_to_stable_diffusion(self.seed,generated_image['images'][0],PV.sdrenderBeatenPrompt(chosen_race),PV.sdrenderBeatenNegPrompt(),40,13,0.9,448,768,"DDIM") # self,seed,image_path,prompt,negprompt,steps,cfg_scale,strength,width,height,sampler_name
                 Image_data['revealed'] = result_content
                 new_image_path = api_handler.save_image(result_content, image_path,"-revealed")
                 if VerboseLogging: self.logger.logTime("step-6c")
@@ -527,7 +524,7 @@ class CharGen():
             if not (SDChartesting or Failed):
                 image_path = imagename
                 prompt = PV.sdrenderWetPrompt(chosen_race,chosen_mood)
-                result_content = api_handler.send_image_to_stable_diffusion(self.seed,image_path,prompt,PV.sdrenderWetNegPrompt(),30,12,0.75,448,768,"DDIM") # self,seed,image_path,prompt,negprompt,steps,cfg_scale,strength,width,height,sampler_name
+                result_content = api_handler.send_data_to_stable_diffusion(self.seed,generated_image['images'][0],prompt,PV.sdrenderWetNegPrompt(),30,12,0.75,448,768,"DDIM") # self,seed,image_path,prompt,negprompt,steps,cfg_scale,strength,width,height,sampler_name
                 Image_data['wet'] = result_content
                 new_image_path = api_handler.save_image(result_content, image_path,"-wet")
                 if VerboseLogging: self.logger.logTime("step-6d")
@@ -537,7 +534,7 @@ class CharGen():
             if not (SDChartesting or Failed):
                 image_path = imagename
                 prompt = PV.sdrenderRegularPrompt(chosen_race,chosen_mood)
-                result_content = api_handler.send_image_to_stable_diffusion(self.seed,image_path,prompt,PV.sdrenderRegularNegPrompt(),30,12,0.75,448,768,"DDIM") # self,seed,image_path,prompt,negprompt,steps,cfg_scale,strength,width,height,sampler_name
+                result_content = api_handler.send_data_to_stable_diffusion(self.seed,generated_image['images'][0],prompt,PV.sdrenderRegularNegPrompt(),30,12,0.75,448,768,"DDIM") # self,seed,image_path,prompt,negprompt,steps,cfg_scale,strength,width,height,sampler_name
                 Image_data['regular'] = result_content
                 new_image_path = api_handler.save_image(result_content, image_path,"-regular")
                 if VerboseLogging: self.logger.logTime("step-6e")
@@ -615,7 +612,6 @@ class CharGen():
                         # TODO - correcting prop[1] (size) - is a book really large?
                         # TODO - where would you typically position each object?
                         props_response_final = parsedObjects
-                        # CharGen_data['PropsList'] = props_response_final
                         break
                 if x >= retries:
                     if FailureLogging: self.logger.logGeneration(str("ABORT Failure (chargen) - Failed to define props. Iteration (x): "+str(x)+" >= Retries: "+str(retries)))
@@ -636,11 +632,8 @@ class CharGen():
                 for prop in appender:
                     generated_image = api_handler.SDRender(self.seed+propCount,PV.propSpriteSDPrompt(prop[0],fav_color),PV.propSpriteSDPromptNeg(),30,14,512,512,"DDIM") # rectangles #TODO - update to 512x512
                     Image_data['props'] = Img = generated_image['images'][0] # TODO - refactor to be consistent with other SD methods
-                    # Img = generated_image['images'][0] # TODO - refactor to be consistent with other SD methods
                     imagetitle = name_response+" - "+ selected_style + " - prop-orig - " + str(propCount) +" - " + prop[1] +" - "+ prop[0]+".png"           
                     imagename = self.filepath + str(y) + " - " + str(self.seed) + " - " + imagetitle
-                    #with open(imagename, 'wb') as f:
-                    #    f.write(base64.b64decode(Img))
                     propCount += 1
                     prop = prop + [Img]
                     propList.append(prop)
@@ -660,8 +653,9 @@ class CharGen():
                     if prop[4]:
                         imagetitle = name_response+" - "+ selected_style + " - prop-transp - "+ str(propcounter) + " - " + prop[1] +" - "+ prop[0] +" - "+ str(prop[4])+".png"           
                         imagename = self.filepath + str(y) + " - " + str(self.seed) + " - " + imagetitle
-                        with open(imagename, 'wb') as f:
-                            f.write(base64.b64decode(prop[5]))
+                        if SDDebugging:
+                            with open(imagename, 'wb') as f:
+                                f.write(base64.b64decode(prop[5]))
                         storedProps.append(prop)
                         propcounter += 1
                     elif FailureLogging: 

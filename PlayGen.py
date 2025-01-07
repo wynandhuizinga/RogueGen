@@ -365,8 +365,8 @@ class Player():
             south_half = cropped_rotated_img.crop((0, img.height // 2, img.width, img.height))
 
             # Save the halves
-            north_half.save(f'player-halo-north-{i+1}.png')
-            south_half.save(f'player-halo-south-{i+1}.png')
+            if SDDebugging: north_half.save(f'player-halo-north-{i+1}.png')
+            if SDDebugging: south_half.save(f'player-halo-south-{i+1}.png')
 
     def process_base64_image(self, base64_data, char_type='player', tolerance=10):
         # Decode the base64 image data
@@ -405,8 +405,8 @@ class Player():
             south_half_resized = south_half.resize((int(dimx*1.5), int(dimy/2)), Image.ANTIALIAS)
 
             # Save the halves
-            north_half_resized.save(self.path+f'{self.iteration} - {char_type}-halo-north{i+1}.png')
-            south_half_resized.save(self.path+f'{self.iteration} - {char_type}-halo-south{i+1}.png') # TODO - add enemy counter so that enemy1 doesn't overwrite enemy2.
+            if SDDebugging: north_half_resized.save(self.path+f'{self.iteration} - {char_type}-halo-north{i+1}.png')
+            if SDDebugging: south_half_resized.save(self.path+f'{self.iteration} - {char_type}-halo-south{i+1}.png') # TODO - add enemy counter so that enemy1 doesn't overwrite enemy2.
         
     def scale_up_crop_bottom(self, image_data): # TODO - make generic
         image_data = base64.b64decode(image_data)

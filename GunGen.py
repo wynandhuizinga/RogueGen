@@ -131,7 +131,7 @@ class GunGen():
                     print("Attempt ",j,", picture is overly full (cannot filter background): ",alpha_pixel_count / total_pixels, "%, ABORTING! \t\t\t\t\t", end='\r')  
                     # Save the base gun image
                     base_gun_output_path = f'{self.path}/failure {iteration}-{self.counter}- gun__{guntype}_{j}_base.png'
-                    base_gun_img.save(base_gun_output_path)  
+                    if SDDebugging: base_gun_img.save(base_gun_output_path)  
                     continue
 
             # 12. Check and flip the base gun image if necessary
@@ -150,7 +150,7 @@ class GunGen():
             
             # Save the base gun image
             base_gun_output_path = f'{self.path}/{iteration}-gun__{guntype}_{j}_base_{flipped}.png'
-            combined_img.save(base_gun_output_path)
+            if SDDebugging: combined_img.save(base_gun_output_path)
 
             # Add base gun image to the gun_data structure
             buffered_base = io.BytesIO()
@@ -222,7 +222,7 @@ class GunGen():
             
             # Save the upgraded gun image
             upgraded_gun_output_path = f'{self.path}/{iteration}-gun__{guntype}_{j}_upgraded_{flipped}.png'
-            combined_upgraded_img.save(upgraded_gun_output_path)
+            if SDDebugging: combined_upgraded_img.save(upgraded_gun_output_path)
 
             # Add upgraded gun image to the gun_data structure
             buffered_upgraded = io.BytesIO()

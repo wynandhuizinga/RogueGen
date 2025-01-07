@@ -4,7 +4,7 @@ import re
 import json
 import base64
 import os
-
+from Settings import *
 
 class APICallHandler():
     
@@ -193,8 +193,9 @@ class APICallHandler():
         new_file_name = f"{name}"+suffix+f"{ext}"
         new_file_path = os.path.join(dir_name, new_file_name)
         image_data = base64.b64decode(base64_image_data)
-        with open(new_file_path, 'wb') as new_file:
-            new_file.write(image_data)
+        if SDDebugging:
+            with open(new_file_path, 'wb') as new_file:
+                new_file.write(image_data)
         return new_file_path
         
     def send_data_to_stable_diffusion(self,seed,image_data,prompt,negprompt,steps,cfg_scale,strength,width,height,sampler_name):
