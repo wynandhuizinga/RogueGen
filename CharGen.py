@@ -692,7 +692,7 @@ class CharGen():
 
                 data['Gun_Data']['Rifles'] = gunGenerator.generate("Rifle",2,5,fav_color, fav_color_rgb, iteration=y)
                 data['Gun_Data']['Rocket_Launchers'] = gunGenerator.generate("Rocket Launcher",2,4,fav_color, fav_color_rgb,iteration=y)
-                data['Gun_Data']['Magic_Wands'] = gunGenerator.generate("((magic wand))",2,15,fav_color, fav_color_rgb,iteration=y)
+                data['Gun_Data']['Magic_Wands'] = gunGenerator.generate("((magic wand))",2,4,fav_color, fav_color_rgb,iteration=y)
                 data['Gun_Data']['Gatling_Guns'] = gunGenerator.generate("Gatling Gun",2,3,fav_color, fav_color_rgb,iteration=y)
                 
                 if VerboseLogging: self.logger.logTime("step-9")

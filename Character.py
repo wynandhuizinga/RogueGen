@@ -38,7 +38,7 @@ class Character(pygame.sprite.Sprite):
         self.shoot_cooldown = 0
         self.prop_spawn_cooldown = 300
         self.trapDamageCountdown = 0
-        self.ammo = 200
+        self.ammo = 2000
         self.scale = scale
         self.translation = translation = 5
         self.vel_y = 0

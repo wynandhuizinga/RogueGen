@@ -40,7 +40,7 @@ class GunGen():
                     fade_color = int(color[0] * alpha), int(color[1] * alpha), int(color[2] * alpha)
                     draw.line([(start[0], start[1] + i), (end[0], end[1] + i)], fill=fade_color)
 
-            for k in range(11):
+            for k in range(11): #(attempts per iteration j)
                 # 1. Generate a full black image of 448 by 832 pixels
                 img = Image.new('RGB', (width, height), black)
                 draw = ImageDraw.Draw(img)
@@ -125,10 +125,10 @@ class GunGen():
                 # 16. Check if more than 80% of the pixels have a non-zero alpha value
                 if alpha_pixel_count / total_pixels <= 0.2:
                     # Convert combined image to base64
-                    print("picture is not overly full: ",alpha_pixel_count / total_pixels, "%")
+                    print("Attempt ",j,", picture is workable (not overly full): ",alpha_pixel_count / total_pixels, "% \t\t\t\t\t", end='\r')
                     break
                 else:
-                    print("picture is overly full: ",alpha_pixel_count / total_pixels, "%, ABORTING!")  
+                    print("Attempt ",j,", picture is overly full (cannot filter background): ",alpha_pixel_count / total_pixels, "%, ABORTING! \t\t\t\t\t", end='\r')  
                     # Save the base gun image
                     base_gun_output_path = f'{self.path}/failure {iteration}-{self.counter}- gun__{guntype}_{j}_base.png'
                     base_gun_img.save(base_gun_output_path)  

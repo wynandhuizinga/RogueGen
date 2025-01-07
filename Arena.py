@@ -188,20 +188,20 @@ class Arena():
         else:
             self.state, self.conversingEnemy, self.player, self.gun_list = self.areaCommon.play(self.gun_list, player=self.player)
             self.playerCredits = self.player.credits
-        print("end of commonarea - ",self.player.credits)
+        # print("end of commonarea - ",self.player.credits)
 
     def dialogue(self, conversingEnemy):
         dialogue = Dialogue(self.seed,self.screen,self.FPS,self.clock)
         self.state, self.player, self.gun_list = dialogue.dialogue(conversingEnemy,self.player, self.gun_list)
-        print("end of dialogue - ",self.player.credits)
+        # print("end of dialogue - ",self.player.credits)
 
     def run_game(self):
         areaBattle = AreaBattle(self.seed,self.screen,self.directory,self.clock,self.FPS,self.starting_gun)
         if not self.player == None:
             self.playerCredits = self.player.credits
-            print("mid battle - ",self.player.credits)
+            # print("mid battle - ",self.player.credits)
         self.state, self.playerCredits, self.gun_list = areaBattle.play(self.gun_list, self.playerCredits)
         if not self.player == None:
             self.player.credits = self.playerCredits
-        print("player's credits end of battle: ",self.playerCredits)
+        # print("player's credits end of battle: ",self.playerCredits)
             
