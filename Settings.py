@@ -1,5 +1,5 @@
 # SETUP Parameters
-number_of_generations = 3
+number_of_generations = 5
 SeedOverride = "" #54787032 #"provide 8 digit number without quotes"
 playDirectory = "" #"./assets/generated/v016/20241215-54787032-llama2-13b-orca-8k-3319-True/" # define folder with forward (/) slashes, end with slash --> ./assets/generated/.../
 
@@ -19,6 +19,7 @@ SDChartesting = False # Turns off SD
 SDProptesting = False # Turns off SD
 SDBGskipping = True # Turns off Background rendering
 ChatSystemTesting = True
+SDDebugging = False # generates images for all assets (as opposed to solely create json files)
 
 # SDtestingGrand = True
 VerboseLogging = True
