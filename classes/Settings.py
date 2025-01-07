@@ -20,6 +20,7 @@ SDProptesting = False # Turns off SD
 SDBGskipping = True # Turns off Background rendering
 ChatSystemTesting = True
 SDDebugging = False # generates images for all assets (as opposed to solely create json files)
+AvatarTesting = True # testing image generation for avatars only
 
 # SDtestingGrand = True
 VerboseLogging = True

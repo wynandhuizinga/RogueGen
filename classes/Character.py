@@ -5,12 +5,12 @@ import random
 import json
 import base64
 import io
-from Limbs import Face, Body, Legs, Shadow
-from Projectile import Bullet, Splash
-from Explosion import Explosion
-from Prop import Prop
-from ProximityCircle import ProximityCircle
-from Gun import Gun
+from classes.Limbs import Face, Body, Legs, Shadow
+from classes.Projectile import Bullet, Splash
+from classes.Explosion import Explosion
+from classes.Prop import Prop
+from classes.ProximityCircle import ProximityCircle
+from classes.Gun import Gun
 
 class Character(pygame.sprite.Sprite):
 
@@ -81,7 +81,7 @@ class Character(pygame.sprite.Sprite):
 
         # Victory
         if char_type == 'enemy':
-            victory_image_data = self.jsondata['Image_data']['revealed']
+            victory_image_data = self.jsondata['Image_data']['beaten']
             victory_image_bytes = base64.b64decode(victory_image_data)
             victory_image = pygame.image.load(io.BytesIO(victory_image_bytes)).convert_alpha()
             self.victory_image = pygame.transform.scale(victory_image, (int(victory_image.get_width()), int(victory_image.get_height())))

@@ -6,8 +6,8 @@ import json
 import base64
 import os
 import io
-from Settings import API_SETTINGS
-from APICallHandler import APICallHandler
+from classes.Settings import API_SETTINGS
+from classes.APICallHandler import APICallHandler
 
 api_handler = APICallHandler(API_SETTINGS)
 

@@ -5,12 +5,12 @@ import random
 import json
 import base64
 import io
-from Limbs import Face, Body, Legs, Shadow
-from Projectile import Bullet, Splash
-from Explosion import Explosion
-from Prop import Prop
-from Character import Character 
-from Gun import Gun
+from classes.Limbs import Face, Body, Legs, Shadow
+from classes.Projectile import Bullet, Splash
+from classes.Explosion import Explosion
+from classes.Prop import Prop
+from classes.Character import Character 
+from classes.Gun import Gun
 
 class BaseAI(Character):
     def __init__(self, seed, screen, map_width, map_height, directory, gun_list, char_type, x, y, scale, action, speed, health, image_set=0,aimAccuracy=0):

@@ -1,9 +1,9 @@
 
-from CharGen import *
-from Settings import *
-from PlayGen import *
-from Arena import *
-from FloortextureGen import *
+from classes.CharGen import *
+from classes.Settings import *
+from classes.PlayGen import *
+from classes.Arena import *
+from classes.FloortextureGen import *
 
 Abort = False
 

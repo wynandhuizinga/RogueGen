@@ -1,10 +1,10 @@
 import pygame
 import textwrap
-from Camera import Camera
-from MapGen import MapGen
-from Settings import *
-from Character import Character
-from Crosshair import Crosshair
+from classes.Camera import Camera
+from classes.MapGen import MapGen
+from classes.Settings import *
+from classes.Character import Character
+from classes.Crosshair import Crosshair
 
 
 class AreaCommon():

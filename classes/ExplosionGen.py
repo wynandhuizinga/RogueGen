@@ -4,8 +4,8 @@ import base64
 import requests
 import json
 import random
-from APICallHandler import *
-from Settings import *
+from classes.APICallHandler import *
+from classes.Settings import *
 
 api_handler = APICallHandler(API_SETTINGS)
 

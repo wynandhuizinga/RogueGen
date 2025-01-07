@@ -5,17 +5,18 @@ import math
 import cProfile
 import pstats
 import io
-from Settings import *
-from Character import *
-from AreaCommon import AreaCommon
-from AreaBattle import AreaBattle
-from AI import BaseAI
-from MapGen import MapGen
-from Camera import Camera
-from Crosshair import Crosshair
-from Dialogue import Dialogue
-from APICallHandler import APICallHandler
 import textwrap
+
+from classes.Settings import *
+from classes.Character import *
+from classes.AreaCommon import AreaCommon
+from classes.AreaBattle import AreaBattle
+from classes.AI import BaseAI
+from classes.MapGen import MapGen
+from classes.Camera import Camera
+from classes.Crosshair import Crosshair
+from classes.Dialogue import Dialogue
+from classes.APICallHandler import APICallHandler
 
 api_handler = APICallHandler(API_SETTINGS)
 

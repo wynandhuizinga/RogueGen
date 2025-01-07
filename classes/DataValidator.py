@@ -2,7 +2,7 @@ import requests
 import random
 import re
 
-from PromptVault import PromptVault as PV
+from classes.PromptVault import PromptVault as PV
 
 class DataValidator():
 

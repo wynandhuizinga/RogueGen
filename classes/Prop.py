@@ -6,7 +6,7 @@ import json
 import base64
 import io
 
-from Explosion import Explosion
+from classes.Explosion import Explosion
 
 class Prop(pygame.sprite.Sprite):
     def __init__(self, x, y, prop, explosions):

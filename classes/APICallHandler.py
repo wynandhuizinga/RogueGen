@@ -4,7 +4,7 @@ import re
 import json
 import base64
 import os
-from Settings import *
+from classes.Settings import *
 
 class APICallHandler():
     
@@ -187,13 +187,13 @@ class APICallHandler():
         processed_image_data = response_data['image']
         return processed_image_data
 
-    def save_image(self,base64_image_data, original_path,suffix):
+    def save_image(self,base64_image_data, original_path,suffix, Testing=False):
         dir_name, file_name = os.path.split(original_path)
         name, ext = os.path.splitext(file_name)
         new_file_name = f"{name}"+suffix+f"{ext}"
         new_file_path = os.path.join(dir_name, new_file_name)
         image_data = base64.b64decode(base64_image_data)
-        if SDDebugging:
+        if SDDebugging or Testing:
             with open(new_file_path, 'wb') as new_file:
                 new_file.write(image_data)
         return new_file_path

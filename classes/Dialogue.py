@@ -3,11 +3,12 @@ import random
 import textwrap
 import base64
 import json
-from Settings import *
-from APICallHandler import APICallHandler
 from io import BytesIO
 import io
 from PIL import Image
+
+from classes.Settings import *
+from classes.APICallHandler import APICallHandler
 
 api_handler = APICallHandler(API_SETTINGS)
 

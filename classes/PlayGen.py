@@ -5,13 +5,13 @@ import random
 import numpy as np
 import io
 import base64
-
-from ExplosionGen import ExplosionGenerator
 from PIL import Image, ImageDraw, ImageEnhance
-from Settings import *
-from APICallHandler import APICallHandler
-from PromptVault import PromptVault as PV
-from Logger import Logger
+
+from classes.ExplosionGen import ExplosionGenerator
+from classes.Settings import *
+from classes.APICallHandler import APICallHandler
+from classes.PromptVault import PromptVault as PV
+from classes.Logger import Logger
 
 
 api_handler = APICallHandler(API_SETTINGS)
@@ -454,7 +454,6 @@ class Player():
 
         
     def coordinate_generations(self,char_type):
-        if VerboseLogging: self.logger.logTime("s8-sub")
         player_image_data = {}
         face_data = {}
         body_data = {}
@@ -483,6 +482,7 @@ class Player():
         attack_data['splash_data'] = []
         
         if char_type == 'player':
+            print("\t\t\t\t Step-8a: Generating player specific assets", end='\r')
             self.number_of_explosions = 0 # Player doesn't need explosions?   
             # Crosshair
             crosshair = self.convert_template_to_fav_color('./templates/crosshair.png', color_str=self.fav_color_rgb,bleached=False)
@@ -506,10 +506,11 @@ class Player():
                 temp_list.append(processed_img_data)
                 api_handler.save_image(processed_img_data, self.path,f'{self.iteration} - {char_type}-pit_trap{i}.png')
             player_image_data['pittrap_data'] = temp_list
-            if VerboseLogging: self.logger.logTime("step-8-0")
+            if VerboseLogging: self.logger.logTime("step-8a")
 
                 
         # Explosions:
+        print("\t\t\t\t Step-8b: Generating explosions", end='\r')
         explosionGenerator = ExplosionGenerator()
         attack_data['explosion_data'] = explosionGenerator.generate_explosion_sequence(
             self.path,
@@ -526,8 +527,10 @@ class Player():
             seed=self.seed+self.iteration+random.randint(5000,9999),
             number_of_explosions=self.number_of_explosions
         )
-        if VerboseLogging: self.logger.logTime("step-8a")
+        if VerboseLogging: self.logger.logTime("step-8b")
 
+        # Limbs generation
+        print("\t\t\t\t Step-8c: Generating character idle limbs", end='\r')
         # face idle
         self.facefront = self.convert_template_to_fav_color('./templates/faceidle.png', color_str=self.fav_color_rgb,bleached=True)
         processed_img_data = api_handler.send_data_to_stable_diffusion(self.seed,self.facefront,PV.playerFace(self.subject),PV.playerFaceNeg(),30,10,0.9,512,512,"Euler a")
@@ -548,9 +551,9 @@ class Player():
         processed_img_data = self.taper_transparency(self.transparencyConversion(processed_img_data),0.1,1.0) 
         legs_data['idle'].append(processed_img_data)
         api_handler.save_image(processed_img_data, self.path,f'{self.iteration} - {char_type}-legs-idle1.png')
-        if VerboseLogging: self.logger.logTime("step-8b")
+        if VerboseLogging: self.logger.logTime("step-8c")
 
-
+        print("\t\t\t\t Step-8d: Generating character dead limbs", end='\r')
         # face dead
         self.facefront = self.convert_template_to_fav_color('./templates/facedead.png', color_str=self.fav_color_rgb,bleached=True)
         processed_img_data = api_handler.send_data_to_stable_diffusion(self.seed,self.facefront,PV.playerFace(self.subject),PV.playerFaceNeg(),30,10,0.9,512,512,"Euler a")
@@ -571,9 +574,9 @@ class Player():
         processed_img_data = self.rotate_image_counterclockwise(self.taper_transparency(self.transparencyConversion(processed_img_data),0.1,1.0))
         legs_data['dead'].append(processed_img_data)
         api_handler.save_image(processed_img_data, self.path,f'{self.iteration} - {char_type}-legs-dead1.png')
-        if VerboseLogging: self.logger.logTime("step-8c")
+        if VerboseLogging: self.logger.logTime("step-8d")
 
-
+        print("\t\t\t\t Step-8e: Generating character jump limbs", end='\r')
         # legs jump (2 images)
         self.legsfront = self.convert_template_to_fav_color('./templates/legsjump.png', color_str=self.fav_color_rgb,doublebleached=True)
         processed_img_data = api_handler.send_data_to_stable_diffusion(self.seed,self.legsfront,PV.playerLegs(self.fav_color,self.subject),PV.playerLegsNeg(),40,12,0.9,512,512,"DDIM")
@@ -583,9 +586,9 @@ class Player():
         processed_img_data3 = self.taper_transparency(self.scale_up_crop_bottom(self.transparencyConversion(processed_img_data)),0.1,1.0)  
         legs_data['jump'].append(processed_img_data2) #3!!!
         api_handler.save_image(processed_img_data3, self.path,f'{self.iteration} - {char_type}-legs-jump2.png')
-        if VerboseLogging: self.logger.logTime("step-8d")
+        if VerboseLogging: self.logger.logTime("step-8e")
 
-
+        print("\t\t\t\t Step-8f: Generating character move limbs", end='\r')
         # face move
         self.facefront = self.convert_template_to_fav_color('./templates/facemove.png', color_str=self.fav_color_rgb,bleached=True)
         processed_img_data = api_handler.send_data_to_stable_diffusion(self.seed,self.facefront,PV.playerFaceSide(self.subject),PV.playerFaceNeg(),30,10,0.9,512,512,"Euler a")
@@ -643,34 +646,6 @@ class Player():
         processed_img_data = self.taper_transparency(self.transparencyConversion(processed_img_data),0.1,1.0) 
         legs_data['move'].append(processed_img_data)
         api_handler.save_image(processed_img_data, self.path,f'{self.iteration} - {char_type}-legs-move3.png')
-        if VerboseLogging: self.logger.logTime("step-8e")
-
-        """
-        # attack (36 image)
-        self.attackhalo = self.convert_template_to_fav_color('./templates/playercircle.png', color_str=self.fav_color_rgb,doublebleached=True)
-        processed_img_data = api_handler.send_data_to_stable_diffusion(self.seed,self.attackhalo,PV.attackHalo(self.fav_color),"",30,12,0.75,512,512,"DDIM")
-        self.process_base64_image(processed_img_data, char_type=char_type)
         if VerboseLogging: self.logger.logTime("step-8f")
-
-        # projectile (5/5 images)
-        self.projectile = self.convert_template_to_fav_color('./templates/projectile.png', color_str=self.fav_color_rgb)
-        processed_img_data = api_handler.send_data_to_stable_diffusion(self.seed,self.projectile,PV.projectile(self.fav_color,self.element),PV.projectileNeg(),30,13,0.8,512,512,"DDIM") # base projectile
-        for i in range(5): # evolutions
-            processed_img_data2 = api_handler.send_data_to_stable_diffusion(self.seed+i,processed_img_data,PV.projectile(self.fav_color,self.element),PV.projectileNeg(),30,13,0.8,512,512,"DDIM")
-            processed_img_data2 = self.transparencyConversion(processed_img_data2)
-            attack_data['projectile_data'].append(processed_img_data2)
-            api_handler.save_image(processed_img_data2, self.path,f'{self.iteration} - {char_type}-projectile{i}.png')
-        if VerboseLogging: self.logger.logTime("step-8f")
-
-        # splash (5/5 images) # evolutions
-        processed_img_data = api_handler.send_image_to_stable_diffusion(self.seed,'./templates/watersplash.png',PV.splash(self.element,self.splash),PV.splashNeg(),30,13,0.8,512,512,"DDIM") # base splash
-        for i in range(7):
-            # make processed_img_data taper off transparency radially
-            processed_img_data = api_handler.send_data_to_stable_diffusion(self.seed+i,processed_img_data,PV.splashEvo(self.element,self.splash),PV.splashNeg(),30,13,0.6,512,512,"DDIM")
-            processed_img_data2 = self.shift_color(self.fade_to_transparency(self.increase_alpha_exponentially(self.convert_image_to_alpha(processed_img_data),30)),self.fav_color_rgb)
-            attack_data['splash_data'].append(processed_img_data2)
-            api_handler.save_image(processed_img_data2, self.path,f'{self.iteration} - {char_type}-splash{i}.png')
-        if VerboseLogging: self.logger.logTime("step-8g")
-        """
         
         return player_image_data

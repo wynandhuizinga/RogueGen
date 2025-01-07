@@ -1,11 +1,11 @@
 import pygame
 # import textwrap
-from Camera import Camera
-from MapGen import MapGen
-from Settings import *
-from Character import *
-from Crosshair import Crosshair
-from AI import BaseAI
+from classes.Camera import Camera
+from classes.MapGen import MapGen
+from classes.Settings import *
+from classes.Character import *
+from classes.Crosshair import Crosshair
+from classes.AI import BaseAI
 
 
 class AreaBattle():

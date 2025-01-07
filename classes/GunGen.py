@@ -3,10 +3,10 @@ import numpy as np
 import base64
 import random
 import io
-from Settings import *
-from APICallHandler import APICallHandler
-from PromptVault import PromptVault as PV
-from PlayGen import Player as PG
+from classes.Settings import *
+from classes.APICallHandler import APICallHandler
+from classes.PromptVault import PromptVault as PV
+from classes.PlayGen import Player as PG
 
 api_handler = APICallHandler(API_SETTINGS)
 
@@ -128,7 +128,7 @@ class GunGen():
                     print("Attempt ",j,", picture is workable (not overly full): ",alpha_pixel_count / total_pixels, "% \t\t\t\t\t", end='\r')
                     break
                 else:
-                    print("Attempt ",j,", picture is overly full (cannot filter background): ",alpha_pixel_count / total_pixels, "%, ABORTING! \t\t\t\t\t", end='\r')  
+                    print("Attempt ",j,", picture is overly full (cannot filter background): ",str("{:.2f}".format(alpha_pixel_count / total_pixels)), "%, ABORTING! \t\t\t\t\t", end='\r')  
                     # Save the base gun image
                     base_gun_output_path = f'{self.path}/failure {iteration}-{self.counter}- gun__{guntype}_{j}_base.png'
                     if SDDebugging: base_gun_img.save(base_gun_output_path)  
@@ -239,6 +239,7 @@ class GunGen():
                 "base_gun_data": base_gun_data,
                 "upgraded_gun_data": upgraded_gun_data
             })
+        print("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t", end='\r') # blanking issues line
 
         return gun_data_list
 
