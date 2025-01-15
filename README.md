@@ -11,7 +11,8 @@ This repository is the result of an exploration providing GPT4.o to a non-develo
 ### Pre-requisites:
 Hardware (GPU):
 - Any Nvidia graphics card of 3rd generation or later: (i.e. 3060 Ti 12gb vram)
-Succesful installation of:
+
+Software:
 - Python 3.12.2 --> ensure it's properly set in environment variables/PATH
 - Stable diffusion 1.5 --> A1111 worked for me
 - Oobabooga --> any LLM host should do as long as it has API endpoints for 'chat', 'completion' and 'embeddings'. 
